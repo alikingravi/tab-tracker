@@ -24,13 +24,51 @@ onDemandsAndNeedsClick {
 
                 Apply {
                     - saves signatures
-                    - 
+                    - show please wait modal
+                    - makes another ajax call
+
+                    Sale:completeDemandsAndNeeds {
+                        server side:
+                            - saves question responses
+                            - verifies if signatures exit
+                            - generate and store d&n
+                            - edf integration
+                        onSuccess {
+                            - removes loading animation
+                            - calls onApplyClick function
+
+                            onApplyClick {
+                                - makes another ajax call to applt for products
+
+                                Product:apply {
+                                    server side:
+                                        - validation
+                                        - add data to products and all related tables
+                                    onSuccess {
+                                        - clear any errors
+                                        - reset data and modals
+                                        - remove loading animation
+                                        - set status of products to complete
+                                    }    
+                                }
+                            }
+                        }    
+                    }
                 }
-
             }
-            
-
-
         }
     }
 }
+
+Summary
+
+onDemandsAndNeedsClick()
+    demandsAndNeedsSubmit()
+        -> Sale:getDemandsAndNeedsDocumentHtml
+            Modal: Apply
+                -> Sale:completeDemandsAndNeeds
+                    onSuccess: onApplyClick()
+                        -> Product:apply
+
+3 ajax calls are made asynchronously which may create a problem of one call finishing before the other.
+This behaviour can happen in any order and may change depending on the internet connection as well.
