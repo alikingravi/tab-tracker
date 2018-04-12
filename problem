@@ -1,0 +1,36 @@
+Problem occurs when user clicks the apply button after signing the agreement.
+
+What happens behind the scenes?
+
+onDemandsAndNeedsClick {
+ - Gets a list of applied products
+ - validation
+ - show loading demands and needs animation
+    
+    demandsAndNeedsSubmit {
+        - Prepares ajax data
+        - makes ajax call
+
+        Sale:getDemandsAndNeedsDocumentHtml {
+            server side: 
+                - Saves products
+                - Delete signatures for step
+                - Save question responses
+                - Generate and store d&n 
+                - return getDocumentHtml()
+            onSuccess {
+                - Removes loading animation
+                - Opens jQury dialog: Apply | Print | Cancel
+
+                Apply {
+                    - saves signatures
+                    - 
+                }
+
+            }
+            
+
+
+        }
+    }
+}
