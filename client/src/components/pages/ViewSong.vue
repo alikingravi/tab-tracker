@@ -2,19 +2,19 @@
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
       <v-flex xs6>
-        <panel :title="song.title + ' Tabs'" class="my-3 mx-3">
+        <panel :title="song.title + ' Tabs'" class="my-3 mx-1">
             <textarea id="tab-area" readonly v-model="song.tab"></textarea>
         </panel>
       </v-flex>
 
       <v-flex xs6>
-        <panel title="Video" class="my-3 mx-3">
+        <panel title="Video" class="my-3 mx-1">
           <v-flex>
             <iframe width="560" height="315" :src="'https://www.youtube.com/embed/' + song.youtubeId" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </v-flex>
         </panel>
 
-        <panel title="Lyrics" class="my-3 mx-3">
+        <panel title="Lyrics" class="my-3 mx-1">
           <v-flex class="px-3">
             <textarea id="lyrics-area" readonly v-model="song.lyrics"></textarea>
           </v-flex>
@@ -61,6 +61,7 @@ textarea {
 }
 #tab-area {
   height: 1000px;
+  font-size: 11px;
 }
 #lyrics-area {
   height: 503px;
