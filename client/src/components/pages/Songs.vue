@@ -4,13 +4,13 @@
       <panel title="Songs">
         <div v-for="song in songs" :key="song.id">
           <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
-              <v-card>
+            <v-flex xs6 sm6 offset-sm3>
+              <v-card class="my-3 mx-3">
                 <v-card-media :src="song.albumImageUrl" height="200px">
                 </v-card-media>
                 <v-card-title primary-title>
                   <div>
-                    <h3 class="headline mb-0">{{song.title}}</h3>
+                    <h3 class="headline mb-0 text-xs-left my-2">{{song.title}}</h3>
                     <div class="title text-xs-left my-2">Artist: {{ song.artist }}</div>
                     <div class="title text-xs-left my-2">Album: {{ song.album }}</div>
                     <div class="title text-xs-left my-2">Genre: {{ song.genre }}</div>

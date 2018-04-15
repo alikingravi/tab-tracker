@@ -41,8 +41,8 @@
         </panel>
       </v-flex>
       <v-flex xs12 class="py-5">
-        <div class="has-error" v-html="error"></div>
-        <v-btn class="cyan" color="info" @click="createSong" large>Add Song<v-icon right>playlist_add</v-icon></v-btn>
+        <div class="error" v-html="error"></div>
+        <v-btn class="cyan" color="info" @click="saveSong" large v-if="$store.state.isUserLoggedIn">Save Song<v-icon right>save</v-icon></v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -68,12 +68,13 @@ export default {
         lyrics: null,
         tab: null
       },
+      songId: null,
       error: null,
       required: (value) => !!value || 'Required'
     }
   },
   methods: {
-    async createSong (req, res) {
+    async saveSong (req, res) {
       this.error = null
       const areAllFieldsFilledIn = Object
         .keys(this.song)
@@ -83,9 +84,12 @@ export default {
         return
       }
       try {
-        await SongsService.post(this.song)
+        await SongsService.put(this.song)
         this.$router.push({
-          name: 'songs'
+          name: 'song',
+          params: {
+            songId: this.songId
+          }
         })
       } catch (err) {
         res.status(500).send({
@@ -93,12 +97,18 @@ export default {
         })
       }
     }
+  },
+  async mounted () {
+    try {
+      this.songId = this.$store.state.route.params.songId
+      this.song = (await SongsService.show(this.songId)).data
+      console.log(this.songId)
+    } catch (err) {
+    }
   }
 }
 </script>
 
 <style>
-.has-error {
-  color: red;
-}
+
 </style>

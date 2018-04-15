@@ -10,5 +10,15 @@ export default {
   // Create Song
   post (song) {
     return Api().post('songs', song)
+  },
+
+  // Show Song
+  show (songId) {
+    return Api().get(`songs/${songId}`)
+  },
+
+  // Save Song
+  put (song) {
+    return Api().put(`songs/${song.id}`, song)
   }
 }

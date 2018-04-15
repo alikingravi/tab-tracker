@@ -17,7 +17,7 @@
               required
             ></v-text-field>
             <br>
-            <div class="error" v-html="error"></div>
+            <div class="has-error" v-html="error"></div>
             <v-btn class="cyan" color="info" @click="login">Login</v-btn>
           </v-form>
         </v-flex>
@@ -51,6 +51,9 @@ export default {
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
         this.error = ''
+        this.$router.push({
+          name: 'songs'
+        })
       } catch (error) {
         this.error = error.response.data.error
       }
@@ -60,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-  .error {
+  .has-error {
     color: red;
   }
 </style>
