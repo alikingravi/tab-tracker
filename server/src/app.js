@@ -13,7 +13,7 @@ app.use(morgan('combined'))
 require('./routes')(app)
 
 // Database Connection
-sequelize.sync()
+sequelize.sync({force: false})
   .then(() => {
     // Listen to server
     app.listen(config.port)
